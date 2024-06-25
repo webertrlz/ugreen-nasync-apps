@@ -1,0 +1,19 @@
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+      - ./transcode:/transcode
+      - ./config:/config
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      PLEX_UID: 1001
+      PLEX_GID: 10
+      TZ: Europe/London
+      PLEX_CLAIM: <claim-TOKEN>
+#    expose:
+#      - 32400
+    network_mode: host
