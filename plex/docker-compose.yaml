@@ -1,19 +1,23 @@
+---
+# docker-compose file with minimal Plex Server configuration
+# run from within the directory where Plex data will be stored
 services:
   plex:
+    # https://github.com/plexinc/pms-docker
     image: plexinc/pms-docker:latest
     container_name: plex
     restart: unless-stopped
     volumes:
-      - ./data:/data
-      - ./transcode:/transcode
-      - ./config:/config
+      - ./data:/data            # media folders
+      - ./transcode:/transcode  # transcoding files
+      - ./config:/config        # database and configuration
     devices:
-      - /dev/dri:/dev/dri
+      - /dev/dri:/dev/dri       # gpu device for hw encoding
     environment:
-      PLEX_UID: 1001
-      PLEX_GID: 10
-      TZ: Europe/London
-      PLEX_CLAIM: <claim-TOKEN>
+      PLEX_UID: 1001            # UID of User with write access to folders
+      PLEX_GID: 10              # GID of User with write access to folders
+      TZ: Europe/London         # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      PLEX_CLAIM: <claim-TOKEN> # Visit https://www.plex.tv/claim
 #    expose:
 #      - 32400
     network_mode: host
