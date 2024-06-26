@@ -20,4 +20,4 @@ services:
       PLEX_CLAIM: <claim-TOKEN> # Visit https://www.plex.tv/claim
 #    expose:
 #      - 32400
-    network_mode: host
+    network_mode: host          # Optional, might use bridge mode instead (requires port mapping)
